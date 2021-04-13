@@ -7,7 +7,7 @@ These steps will guide you through installing the necessary tools on your develo
 
 * AWS Command Line Interface (CLI)
 
-### Step 1: Install AWS CLI on developmet host
+### Step 1: Install AWS CLI on development host
 
 On your host, install the [AWS CLI version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
@@ -65,4 +65,18 @@ Verify the UserId and Account values are correct in the output.
     "Account": "11-----16",
     "Arn": "arn:aws:iam::11-----16:user/s---c"
 }
+```
+
+### Step 4: Install other Linux tools
+
+> **Required tools**: These tools are required for later steps of the workshop.
+
+```bash
+sudo apt install curl -y
+```
+
+> **Optional tools**: These tools can make working with the device easier and are optional.
+
+```bash
+sudo apt install htop vim tree tmux -y
 ```

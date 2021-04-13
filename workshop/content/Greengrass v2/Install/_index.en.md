@@ -1,7 +1,10 @@
 +++
-title = "Greengrass v2"
-weight = 13
+title = "Install"
+date = 2021-04-13T11:06:06-07:00
+weight = 21
+chapter = true
 +++
+
 
 This lab will guide you to set up AWS IoT Greengrass v2 on the device you previously set up. 
 
@@ -21,17 +24,37 @@ Open the terminal app.
 
 Enter these commands into the device shell:
 
+(Copy and paste one line at a time and enter password for `sudo` when prompted.)
+
 ```bash
 wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
+
 sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+
 sudo apt-get update; sudo apt-get install -y java-1.8.0-amazon-corretto-jdk
+```
+
+Validate the successful installation of Java with
+
+```bash
 java -version
 ```
+
+The output should look similar to:
+
+```bash
+openjdk version "1.8.0_282"
+OpenJDK Runtime Environment Corretto-8.282.08.1 (build 1.8.0_282-b08)
+OpenJDK 64-Bit Server VM Corretto-8.282.08.1 (build 25.282-b08, mixed mode)
+```
+
+_NB- This workshop was developed with Corretto v 1.8, but other JREs may work just as well_
 
 ### Step 3: Download Greengrass v2
 
 ```bash
 curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip > greengrass-nucleus-latest.zip
+
 unzip greengrass-nucleus-latest.zip -d GreengrassCore && rm greengrass-nucleus-latest.zip
 ```
 
@@ -51,8 +74,11 @@ Greengrass v2 has the ability to self-install and configure, but needs access cr
 
 
 ```bash
-export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
-export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+# replace these with your credentials
+export AWS_ACCESS_KEY_ID=<paste_your_id_here>
+export AWS_SECRET_ACCESS_KEY=<paste_your_key_here>
+
+# modify any of these as desired, or copy/paste as is
 export AWS_DEFAULT_REGION=us-west-2
 
 export THING_NAME=jetson
@@ -78,3 +104,5 @@ sudo -E java -Dlog.store=FILE \
 
 sudo chmod 755 /greengrass/v2 && sudo chmod 755 /greengrass
 ```
+
+Your Greengrass core is now set up and ready to go. Continue on to the next step to validate the installation.

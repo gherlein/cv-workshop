@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.82.0" />
   <meta name="description" content="AWS Computer Vision at the Edge Workshop">
 <meta name="author" content="Amazon AWS">
 
@@ -157,6 +157,40 @@
 
             
           
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+ 
+  
+    
+    <li data-nav-id="/greengrass-v2.html" title="Install Greengrass V2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../greengrass-v2.html">
+          Install Greengrass V2
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
             
             
 
@@ -164,13 +198,37 @@
  
   
     
-    <li data-nav-id="/setup-nvidia-device/greengrass.html" title="Greengrass v2" class="dd-item 
+    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
         
         
         
         ">
-      <a href="../setup-nvidia-device/greengrass.html">
-          Greengrass v2
+      <a href="../greengrass-v2/validate.html">
+          <b>X. </b>Validate
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
+    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../greengrass-v2/install.html">
+          <b>X. </b>Install
           
       </a>
       
@@ -740,8 +798,13 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#global-site-parameters">Global site parameters</a></li>
-    <li><a href="#activate-search">Activate search</a></li>
+    <li>
+      <ul>
+        <li><a href="#step-1-install-aws-cli-on-developmet-host">Step 1: Install AWS CLI on developmet host</a></li>
+        <li><a href="#step-2-configure-the-aws-cli">Step 2: Configure the AWS CLI</a></li>
+        <li><a href="#step-3-verify-configuration">Step 3: Verify configuration</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </div>
@@ -759,47 +822,52 @@
           
 
 
-	<h2 id="global-site-parameters">Global site parameters</h2>
-<p>On top of <a href="https://gohugo.io/overview/configuration/" target="_blank" rel="noopener noreferrer">Hugo global configuration</a>, this template lets you define the following parameters in your <code>config.toml</code> (here, values are default).</p>
-<p>Note that some of these parameters are explained in details in other sections of this documentation.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">params</span>]
-  <span style="color:#75715e"># Prefix URL to edit current page. Will display an &#34;Edit this page&#34; button on top right hand corner of every page. </span>
-  <span style="color:#75715e"># Useful to give opportunity to people to create merge request for your doc.</span>
-  <span style="color:#75715e"># See the config.toml file from this documentation site to have an example.</span>
-  <span style="color:#a6e22e">editURL</span> = <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># Author of the site, will be used in meta information</span>
-  <span style="color:#a6e22e">author</span> = <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># Description of the site, will be used in meta information</span>
-  <span style="color:#a6e22e">description</span> = <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># Shows a checkmark for visited pages on the menu</span>
-  <span style="color:#a6e22e">showVisitedLinks</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># Disable search function. It will hide search bar</span>
-  <span style="color:#a6e22e">disableSearch</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># Javascript and CSS cache are automatically busted when new version of site is generated. </span>
-  <span style="color:#75715e"># Set this to true to disable this behavior (some proxies don&#39;t handle well this optimization)</span>
-  <span style="color:#a6e22e">disableAssetsBusting</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># Set this to true to disable copy-to-clipboard button for inline code.</span>
-  <span style="color:#a6e22e">disableInlineCopyToClipBoard</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># A title for shortcuts in menu is set by default. Set this to true to disable it. </span>
-  <span style="color:#a6e22e">disableShortcutsTitle</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># When using mulitlingual website, disable the switch language button.</span>
-  <span style="color:#a6e22e">disableLanguageSwitchingButton</span> = <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># Hide breadcrumbs in the header and only show the current page title</span>
-  <span style="color:#a6e22e">disableBreadcrumb</span> = <span style="color:#66d9ef">true</span>
-  <span style="color:#75715e"># Hide Next and Previous page buttons normally displayed full height beside content</span>
-  <span style="color:#a6e22e">disableNextPrev</span> = <span style="color:#66d9ef">true</span>
-  <span style="color:#75715e"># Order sections in menu by &#34;weight&#34; or &#34;title&#34;. Default to &#34;weight&#34;</span>
-  <span style="color:#a6e22e">ordersectionsby</span> = <span style="color:#e6db74">&#34;weight&#34;</span>
-</code></pre></div><h2 id="activate-search">Activate search</h2>
-<p>If not already present, add the follow lines in the same <code>config.toml</code> file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">outputs</span>]
-<span style="color:#a6e22e">home</span> = [ <span style="color:#e6db74">&#34;HTML&#34;</span>, <span style="color:#e6db74">&#34;RSS&#34;</span>, <span style="color:#e6db74">&#34;JSON&#34;</span>]
+	<p>These steps will guide you through installing the necessary tools on your development host and the target device. You will install:</p>
+<ul>
+<li>AWS Command Line Interface (CLI)</li>
+</ul>
+<h3 id="step-1-install-aws-cli-on-developmet-host">Step 1: Install AWS CLI on developmet host</h3>
+<p>On your host, install the <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html" target="_blank" rel="noopener noreferrer">AWS CLI version 2</a></p>
+<blockquote>
+<p><strong>Linux (x86_64)</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#e6db74">&#34;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&#34;</span> -o <span style="color:#e6db74">&#34;awscliv2.zip&#34;</span>
+unzip awscliv2.zip
+sudo ./aws/install
+</code></pre></div><blockquote>
+<p><strong>MacOS</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#e6db74">&#34;https://awscli.amazonaws.com/AWSCLIV2.pkg&#34;</span> -o <span style="color:#e6db74">&#34;AWSCLIV2.pkg&#34;</span>
+sudo installer -pkg AWSCLIV2.pkg -target /
+</code></pre></div><h3 id="step-2-configure-the-aws-cli">Step 2: Configure the AWS CLI</h3>
+<ol>
+<li>
+<p>Find the ACCESS KEY ID and SECRET ACCESS KEY for a role in your AWS account that has permissions to create IAM, IoT, and S3 resources. These are typically provided when the account is created and often delivered in a CSV file. If you cannot locate them, contact your account administrator or create new credentials from the IAM console.</p>
+</li>
+<li>
+<p>Add the credentials to your AWS profile by typing</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws configure
+<span style="color:#75715e"># optionally add -profile &lt;profile-name&gt; </span>
+</code></pre></div><p>When prompted provide the Access Key and Secret Access Key. For the purposes of this workshop, set the region to <code>us-west-2</code> and <code>json</code> for the output format. The <code>aws configure</code> command can be reused to verify that values have been set properly.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws configure                                                            
+
+<span style="color:#75715e"># at the prompt, provide a new value or press return to accept the current value</span>
+AWS Access Key ID <span style="color:#f92672">[</span>****************MNO5<span style="color:#f92672">]</span>: 
+AWS Secret Access Key <span style="color:#f92672">[</span>****************RgDp<span style="color:#f92672">]</span>: 
+Default region name <span style="color:#f92672">[</span>us-west-2<span style="color:#f92672">]</span>: 
+Default output format <span style="color:#f92672">[</span>json<span style="color:#f92672">]</span>: 
+</code></pre></div><h3 id="step-3-verify-configuration">Step 3: Verify configuration</h3>
+<p>Verify the functionality of the CLI and the configuration with the command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws sts get-caller-identity
+</code></pre></div><p>Verify the UserId and Account values are correct in the output.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;UserId&#34;</span>: <span style="color:#e6db74">&#34;AID----BMW&#34;</span>,
+    <span style="color:#e6db74">&#34;Account&#34;</span>: <span style="color:#e6db74">&#34;11-----16&#34;</span>,
+    <span style="color:#e6db74">&#34;Arn&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:iam::11-----16:user/s---c&#34;</span>
+<span style="color:#f92672">}</span>
 </code></pre></div>
-<div class="notices note" ><p>When using this functionality, Hugo generates an index.json file at the root of public folder to be consumed by the lunr.js javascript search enginge.
-When you build the site with <code>hugo serve</code>, Hugo generates the file internally and it doesn’t show up in the filesystem</p>
-</div>
-
-
 
 
 
@@ -885,6 +953,9 @@ When you build the site with <code>hugo serve</code>, Hugo generates the file in
             
         
                     
+            
+        
+                    
                         
             
             
@@ -892,6 +963,37 @@ When you build the site with <code>hugo serve</code>, Hugo generates the file in
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1235,7 +1337,7 @@ When you build the site with <code>hugo serve</code>, Hugo generates the file in
 			<a class="nav nav-prev" href="../setup-nvidia-device/nano.html" title="Jetson Nano"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../setup-nvidia-device/greengrass.html" title="Greengrass v2" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../greengrass-v2.html" title="Install Greengrass V2" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

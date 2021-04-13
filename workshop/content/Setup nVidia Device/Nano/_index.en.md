@@ -7,7 +7,7 @@ This lab will help you set up an [nVidia Jetson Nano](https://developer.nvidia.c
 
 While your Nano may have come with the latest version of JetPack (nVidia's SDK) pre-installed, for the purposes of this guide, a fresh installation will be created. If you are uncertain if the SDK has been pre-installed, you can follow this guide.
 
-### STEP 1: Download the SD Card Image for the Latest JetPack
+### Step 1: Download the SD Card Image for the Latest JetPack
 
 _This guide was prepared with JetPack v. 4.5.1_
 
@@ -31,7 +31,7 @@ unzip <zipfile-downloaded-above>
 
 This will expand the `sd-blob-b01.img` file.
 
-### STEP 2: Write the image to the SD Card
+### Step 2: Write the image to the SD Card
 
 1. Insert an SD Card of at least 16GB (32GB or more recommended) into a card reader and insert the card reader into the host computer's USB port.
 
@@ -106,7 +106,7 @@ diskutil eject /dev/disk$disk_num
 
 Remove the card from the reader.
 
-### STEP 3: Boot and configure the device
+### Step 3: Boot and configure the device
 
 1. With the device powered OFF, insert the SD Card into the device
 

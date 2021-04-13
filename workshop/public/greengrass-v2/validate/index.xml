@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Validate on AWS Computer Vision at the Edge Workshop</title>
+    <link>/greengrass-v2/validate.html</link>
+    <description>Recent content in Validate on AWS Computer Vision at the Edge Workshop</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 13 Apr 2021 11:06:22 -0700</lastBuildDate><atom:link href="/greengrass-v2/validate/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

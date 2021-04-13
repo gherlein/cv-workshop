@@ -14,7 +14,7 @@
   <link rel="shortcut icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 <link rel="icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 
-  <title>Categories :: AWS Computer Vision at the Edge Workshop</title>
+  <title>Install Greengrass V2 :: AWS Computer Vision at the Edge Workshop</title>
 
   
   <link href="./css/nucleus.css" rel="stylesheet">
@@ -45,7 +45,7 @@
   
 </head>
 
-<body class="" data-url="./categories.html">
+<body class="" data-url="./greengrass-v2.html">
   <nav id="sidebar" class="">
 
 
@@ -172,8 +172,8 @@
   
     
     <li data-nav-id="/greengrass-v2.html" title="Install Greengrass V2" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="./greengrass-v2.html">
@@ -770,8 +770,6 @@
               </a>
             </span>
             
-            <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
-            
             <span class="links">
               
           
@@ -780,7 +778,7 @@
           
           
           
-          <a href='./'>AWS Computer Vision at the Edge Workshop</a> > Categories
+          <a href='./'>AWS Computer Vision at the Edge Workshop</a> > Install Greengrass V2
           
           
           
@@ -788,35 +786,111 @@
             </span>
           </div>
           
-          <div class="progress">
-    <div class="wrapper">
-
-    </div>
-</div>
-
-          
         </div>
       </div>
       
 
       
+      <div id="chapter">
+        
         <div id="body-inner">
-          <h1>Categories</h1>
+          <h1>Install Greengrass V2</h1>
           
           
 
 
+	<p>This lab will guide you to set up AWS IoT Greengrass v2 on the device you previously set up.</p>
+<h3 id="step-1-connect-to-the-target-device">Step 1: Connect to the target device</h3>
+<blockquote>
+<p><strong>Using SSH</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh &lt;user&gt;@&lt;device&gt;
+</code></pre></div><blockquote>
+<p><strong>With Keybord and Monitor</strong></p>
+</blockquote>
+<p>Open the terminal app.</p>
+<h3 id="step-2-install-corretto-java">Step 2: Install Corretto (Java)</h3>
+<p>Enter these commands into the device shell:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
+sudo add-apt-repository <span style="color:#e6db74">&#39;deb https://apt.corretto.aws stable main&#39;</span>
+sudo apt-get update; sudo apt-get install -y java-1.8.0-amazon-corretto-jdk
+java -version
+</code></pre></div><h3 id="step-3-download-greengrass-v2">Step 3: Download Greengrass v2</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip &gt; greengrass-nucleus-latest.zip
+unzip greengrass-nucleus-latest.zip -d GreengrassCore <span style="color:#f92672">&amp;&amp;</span> rm greengrass-nucleus-latest.zip
+</code></pre></div><h3 id="step-4-set-environment-variables">Step 4: Set environment variables</h3>
+<p>Greengrass v2 has the ability to self-install and configure, but needs access credentials. Additionally, this installer will create an IoT thing, thing group, and IAM roles. Provide these values through shell variables. The AWS CLI credentials can be the same as you used in the host setup or can be newly created for just this role. The installer will not save these values. Using shell variables eliminates the need to install the CLI on the device.</p>
+<table>
+<thead>
+<tr>
+<th>shell var</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS_ACCESS_KEY_ID</td>
+<td>ID for account to create resources</td>
+</tr>
+<tr>
+<td>AWS_SECRET_ACCESS_KEY</td>
+<td>secret key</td>
+</tr>
+<tr>
+<td>AWS_DEFAULT_REGION</td>
+<td>region to use &ndash; <code>us-west-2</code> for this workshop</td>
+</tr>
+<tr>
+<td>THING_NAME</td>
+<td>device name for this Greengrass Core</td>
+</tr>
+<tr>
+<td>GROUP_NAME</td>
+<td>name for the Greengrass Group</td>
+</tr>
+<tr>
+<td>ROLE_NAME</td>
+<td>name of IAM role for the core</td>
+</tr>
+<tr>
+<td>ROLE_ALIAS</td>
+<td>alias used to refer to role to allow role to change</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>AKIAIOSFODNN7EXAMPLE
+export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+export AWS_DEFAULT_REGION<span style="color:#f92672">=</span>us-west-2
+
+export THING_NAME<span style="color:#f92672">=</span>jetson
+export GROUP_NAME<span style="color:#f92672">=</span>jetsonGroup
+export ROLE_NAME<span style="color:#f92672">=</span>MyGreengrassV2Role
+export ROLE_ALIAS<span style="color:#f92672">=</span>MyGreengrassCoreTokenExchangeRoleAlias
+</code></pre></div><h3 id="step-5-run-the-installer">Step 5: Run the installer</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo -E java -Dlog.store<span style="color:#f92672">=</span>FILE <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -jar ./GreengrassCore/lib/Greengrass.jar <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --aws-region $AWS_DEFAULT_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --root /greengrass/v2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --thing-name $THING_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --thing-group-name $GROUP_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --tes-role-name $ROLE_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --tes-role-alias-name $ROLE_ALIAS <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --component-default-user ggc_user:ggc_group <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --provision true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --setup-system-service true
+
+sudo chmod <span style="color:#ae81ff">755</span> /greengrass/v2 <span style="color:#f92672">&amp;&amp;</span> sudo chmod <span style="color:#ae81ff">755</span> /greengrass
+</code></pre></div>
 
 
-<ul>
-	
-</ul>
 
 
 <footer class=" footline" >
 	
 </footer>
 
+        
+            </div> 
         
         </div>
         
@@ -901,6 +975,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -915,6 +990,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1271,8 +1349,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="./setup-nvidia-device/install-tools.html" title="Install Tools"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="./setup-nvidia-device.html" title="Setup nVidia Device" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="./greengrass-v2/validate.html" title="Validate" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
