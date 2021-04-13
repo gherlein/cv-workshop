@@ -1,14 +1,141 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <sitemap>
-    <loc>en/sitemap.xml</loc>
-    
-  </sitemap>
+  <url>
+    <loc>/</loc>
+  </url>
   
-  <sitemap>
-    <loc>fr/sitemap.xml</loc>
-    
-  </sitemap>
+  <url>
+    <loc>/setup-nvidia-device.html</loc>
+  </url>
   
-</sitemapindex>
+  <url>
+    <loc>/setup-nvidia-device/nano.html</loc>
+  </url>
+  
+  <url>
+    <loc>/setup-nvidia-device/install-tools.html</loc>
+  </url>
+  
+  <url>
+    <loc>/setup-nvidia-device/greengrass.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont/pages.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont/archetypes.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont/markdown.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont/icons.html</loc>
+  </url>
+  
+  <url>
+    <loc>/cont/i18n.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/attachments.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/button.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/expand.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/img.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/notice.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/siteparam.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/siteurl.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/youtube.html</loc>
+  </url>
+  
+  <url>
+    <loc>/launch.html</loc>
+  </url>
+  
+  <url>
+    <loc>/launch/metadata.html</loc>
+  </url>
+  
+  <url>
+    <loc>/categories.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-1/children-1-1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1/children-1-1-1-1-1.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-2.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-3.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/test.html</loc>
+  </url>
+  
+  <url>
+    <loc>/shortcodes/children/children-2/test3.html</loc>
+  </url>
+  
+  <url>
+    <loc>/tags.html</loc>
+  </url>
+  
+</urlset>

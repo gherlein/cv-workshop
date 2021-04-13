@@ -3,8 +3,6 @@ title = "Jetson Nano"
 weight = 11
 +++
 
-# Set up your device
-
 This lab will help you set up an [nVidia Jetson Nano](https://developer.nvidia.com/embedded/jetson-nano-developer-kit) as expected for the remainder of the labs.
 
 While your Nano may have come with the latest version of JetPack (nVidia's SDK) pre-installed, for the purposes of this guide, a fresh installation will be created. If you are uncertain if the SDK has been pre-installed, you can follow this guide.
