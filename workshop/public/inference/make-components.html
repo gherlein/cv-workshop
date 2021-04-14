@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="generator" content="Hugo 0.79.0" />
+  <meta name="generator" content="Hugo 0.82.0" />
   <meta name="description" content="AWS Computer Vision at the Edge Workshop">
 <meta name="author" content="Amazon AWS">
 
@@ -304,85 +304,13 @@
  
   
     
-    <li data-nav-id="/inference/archetypes.html" title="Archetypes" class="dd-item 
+    <li data-nav-id="/inference/deploy.html" title="Deploy and Monitor" class="dd-item 
         
         
         
         ">
-      <a href="../inference/archetypes.html">
-          Archetypes
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-    <li data-nav-id="/inference/markdown.html" title="Markdown Syntax" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../inference/markdown.html">
-          Markdown Syntax
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-    <li data-nav-id="/inference/icons.html" title="Icons and Logos" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../inference/icons.html">
-          Icons and Logos
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
- 
-  
-    
-    <li data-nav-id="/inference/i18n.html" title="Multilingual and i18n" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../inference/i18n.html">
-          Multilingual and i18n
+      <a href="../inference/deploy.html">
+          Deploy and Monitor
           
       </a>
       
@@ -798,13 +726,11 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#folders">Folders</a></li>
-    <li><a href="#types">Types</a></li>
-    <li><a href="#images">Images</a></li>
-    <li><a href="#front-matter-configuration">Front Matter configuration</a>
+    <li>
       <ul>
-        <li><a href="#ordering-sibling-menupage-entries">Ordering sibling menu/page entries</a></li>
-        <li><a href="#using-a-custom-title-for-menu-entries">Using a custom title for menu entries</a></li>
+        <li><a href="#step-1-clone-the-repository">Step 1: Clone the repository</a></li>
+        <li><a href="#step-2-zip-and-upload-artifacts-to-s3">Step 2: Zip and upload artifacts to S3</a></li>
+        <li><a href="#step-3-create-the-components">Step 3: Create the components</a></li>
       </ul>
     </li>
   </ul>
@@ -824,119 +750,142 @@
           
 
 
-	<p>In <strong>Hugo</strong>, pages are the core of your site. All of your workshop steps should be developed as pages.</p>
-<h2 id="folders">Folders</h2>
-<p>Organize your workshop similar to the steps within a specfic workshop. For example, a workshop with 3 labs might look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">    content
-    ├── lab-1
-    │   ├── step-1
-    │   │   ├── step-1a
-    │   │   │   ├── _index.en.md    &lt;<span style="color:#f92672">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1a</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">English</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>    <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1a</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">French</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>        <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">English</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>        <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">French</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>            <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">English</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>            <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">French</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">├──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>                <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">English</span><span style="color:#960050;background-color:#1e0010">)</span>
-    <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">_index</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">md</span>                <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">/</span> <span style="color:#960050;background-color:#1e0010">(</span><span style="color:#a6e22e">in</span> <span style="color:#a6e22e">French</span><span style="color:#960050;background-color:#1e0010">)</span>
-</code></pre></div>
-<div class="notices note" ><p><code>_index.en.md</code> is required in each folder, it’s your “folder home page”</p>
-</div>
+	<p>Inference on the device is implemented with THREE components:</p>
+<ul>
+<li><code>variant.Jetson.DLR</code> provides the Deep Learning Runtime (DLR) libraries needed to run the models on the target device</li>
+<li><code>variant.Jetson.ImageClassification.ModelStore</code> delivers the collection (or zoo) of Image Classifications models that will be used</li>
+<li><code>aws.greengrass.JetsonDLRImageClassification</code> is the actual &lsquo;app&rsquo; that runs the inference model on the device</li>
+</ul>
+<p>The recipes and artifacts have been pre-created and stored in the Github repository:</p>
+<p><a href="https://github.com/scottrfrancis/aws-iot-greengrass-v2-deploy-nvidia-deepstream">https://github.com/scottrfrancis/aws-iot-greengrass-v2-deploy-nvidia-deepstream</a></p>
+<h3 id="step-1-clone-the-repository">Step 1: Clone the repository</h3>
+<ol>
+<li>On your <strong>development host</strong>, clone the repository</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~
 
-<h2 id="types">Types</h2>
-<p>This template defines two types of pages. <em>Default</em> and <em>Chapter</em>. Both can be used at any level of the workshop, the only difference being layout display.</p>
-<p>A <strong>Chapter</strong> displays a page meant to be used as introduction for a set of child pages. Commonly, it contains a simple title and a catch line to define content that can be found under it.
-You can define any HTML as prefix for the menu. In the example below, it&rsquo;s just a number but that could be an <a href="https://fortawesome.github.io/Font-Awesome/" target="_blank" rel="noopener noreferrer">icon</a>.</p>
+git clone git@github.com:scottrfrancis/aws-iot-greengrass-v2-deploy-nvidia-deepstream.git
+</code></pre></div><ol start="2">
+<li>Observe you have the artifacts and recipe files in an arrangement like this:</li>
+</ol>
+<pre><code>.
+├── artifacts
+│   ├── aws.greengrass.JetsonDLRImageClassification
+│   │   ├── 1.0.0
+│   │   │   ├── inference.py
+│   │   │   ├── init.sh
+│   │   │   ├── IPCUtils.py
+│   │   │   ├── jetson_inference.py
+│   │   │   ├── labels.py
+│   │   │   └── samples_images
+│   │   │       ├── dog.jpg
+│   │   │       └── dog.npy
+│   ├── variant.Jetson.DLR
+│   │   └── 1.0.0
+│   │       ├── installer.sh
+│   │       └── LICENSE
+│   └── variant.Jetson.ImageClassification.ModelStore
+│       ├── 0.1.1
+│           ├── resnet18_v1-jetson_nano
+│           │   ├── compiled.meta
+│           │   ├── compiled_model.json
+│           │   ├── compiled.params
+│           │   ├── compiled.so
+│           │   ├── dlr.h
+│           │   ├── libdlr.so
+│           │   └── manifest
+│           ├── resnet18_v1-jetson_tx2
+│           │   ├── compiled.meta
+│           │   ├── compiled_model.json
+│           │   ├── compiled.params
+│           │   ├── compiled.so
+│           │   ├── dlr.h
+│           │   ├── libdlr.so
+│           │   └── manifest
+│           └── resnet18_v1-jetson_xavier
+│               ├── compiled.meta
+│               ├── compiled_model.json
+│               ├── compiled.params
+│               ├── compiled.so
+│               ├── dlr.h
+│               ├── libdlr.so
+│               └── manifest
+└── recipes
+    ├── aws.greengrass.JetsonDLRImageClassification-1.0.0.json
+    ├── variant.Jetson.DLR-1.0.0.json
+    └── variant.Jetson.ImageClassification.ModelStore-1.0.0.json
+
+14 directories, 47 files
+</code></pre><h3 id="step-2-zip-and-upload-artifacts-to-s3">Step 2: Zip and upload artifacts to S3</h3>
+<ol>
+<li>Zip the artifacts for each component</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/artifacts
+
+cd variant.Jetson.DLR/1.0.0/
+zip -rm installer.zip *
+
+cd ../..
+cd variant.Jetson.ImageClassification.ModelStore/0.1.1/
+zip -rm resnet18_v1-jetson.zip *
+
+cd ../..
+cd aws.greengrass.JetsonDLRImageClassification/1.0.0/
+zip -rm image_classification.zip *
+</code></pre></div><p>You should now have a zip file for each component like this</p>
+<pre><code>.
+├── aws.greengrass.JetsonDLRImageClassification
+│   └── 1.0.0
+│       └── image_classification.zip
+├── variant.Jetson.DLR
+│   └── 1.0.0
+│       └── installer.zip
+└── variant.Jetson.ImageClassification.ModelStore
+    └── 0.1.1
+        └── resnet18_v1-jetson.zip
+</code></pre><ol start="2">
+<li>Set the <code>bucket_name</code> environment variable for where you will host the artifact files. On your development <strong>host</strong>, extract your account number to an environment variable</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export region<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;us-west-2&#39;</span>
+export acct_num<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws sts get-caller-identity --query <span style="color:#e6db74">&#34;Account&#34;</span> --output text<span style="color:#66d9ef">)</span>
+export bucket_name<span style="color:#f92672">=</span>greengrass-component-artifacts-$acct_num-$region
+</code></pre></div><p><strong>This bucket should have previously been created in the Greengrass installation lab</strong>. If this bucket does <strong>NOT</strong> exist, you can create it with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 mb s3://$bucket_name
+</code></pre></div><p><strong>NB-</strong> Alternatively, you can use an existing bucket. Set the environment variable <code>$bucket_name</code> for the remainder of this lab.</p>
+<ol start="3">
+<li>Copy the artifacts to the bucket</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/artifacts
+
+aws s3 sync ./ s3://$bucket_name/artifacts/
+</code></pre></div><p>Verify the layout of the artifacts in S3</p>
 
 <figure>
-	<img src="../inference/make-components/pages-chapter.en.png?classes=shadow&width=60pc" alt="Chapter page" />
+	<img src="../inference/make-components/s3-artifacts.png?classes=shadow&width=60pc" alt="Artifacts in S3" />
 </figure>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">+++
-title = &#34;Basics&#34;
-chapter = true
-weight = 10
-pre = &#34;&lt;<span style="color:#f92672">b</span>&gt;1. &lt;/<span style="color:#f92672">b</span>&gt;&#34;
-+++
+<h3 id="step-3-create-the-components">Step 3: Create the components</h3>
+<ol>
+<li>Modify the recipe files to use the bucket and artifacts you just uploaded</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/recipes
 
-<span style="color:#75715e">### Chapter 1
-</span><span style="color:#75715e"></span>
-# Basics
+sed -i <span style="color:#e6db74">&#34;s/BUCKET_NAME/</span>$bucket_name<span style="color:#e6db74">/g&#34;</span> *.json
+</code></pre></div><ol start="2">
+<li>Create the components from the modified recipe files</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/recipes
 
-Discover what this template is all about and the core-concepts behind it.
-</code></pre></div><p>To tell the template to consider a page as a chapter, set <code>chapter=true</code> in the Front Matter of the page.</p>
-<p>A <strong>Default</strong> page is any other content page.</p>
+aws greengrassv2 create-component-version --inline-recipe fileb://variant.Jetson.DLR-1.0.0.json
+aws greengrassv2 create-component-version --inline-recipe fileb://variant.Jetson.ImageClassification.ModelStore-1.0.0.json
+aws greengrassv2 create-component-version --inline-recipe fileb://aws.greengrass.JetsonDLRImageClassification-1.0.0.json
+</code></pre></div><p>Verify the components are shown in the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> under <strong>Greengrass</strong> and <strong>Components</strong>.</p>
 
 <figure>
-	<img src="../inference/make-components/pages-default.en.png?classes=shadow&width=60pc" alt="Default page" />
+	<img src="../inference/make-components/components.png?classes=shadow&width=60pc" alt="Components" />
 </figure>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+++</span>
-<span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Installation&#34;</span>
-<span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">12</span>
-<span style="color:#960050;background-color:#1e0010">+++</span>
-</code></pre></div><h2 id="images">Images</h2>
-<p>There are multiple ways to store images you need to use as part of your workshop. These pages use the Page Bundle method, which keeps the images for specific pages in the same folder structure as the content.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">    content
-    └── lab-1
-        └── step-1
-            └── step-1a
-                ├── _index.en.md        &lt;<span style="color:#f92672">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1a</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span>
-                <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">my_image</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">png</span>    <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">fr</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1a</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">my_image</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">png</span>
-</code></pre></div><p>You can reference images in your pages when using the <a href="https://gohugo.io/content-management/page-bundles/" target="_blank" rel="noopener noreferrer">Page Bundle</a> method by using the <code>img</code> shortcode. More information can be found here.</p>
-<p>You can also opt to store all of your images in the <code>static</code> folder, which will be accessible from</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown">    content
-    └── lab-1
-        └── step-1
-            └── step-1a
-                ├── _index.en.md    &lt;<span style="color:#f92672">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">lab-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">step-1a</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">html</span>
-    <span style="color:#a6e22e">static</span>
-    <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">images</span>
-        <span style="color:#960050;background-color:#1e0010">└──</span> <span style="color:#a6e22e">my_image</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">png</span>         <span style="color:#960050;background-color:#1e0010">&lt;</span><span style="color:#a6e22e">--</span> <span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">images</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#a6e22e">my_image</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">en</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#a6e22e">png</span>
-</code></pre></div><p>You can reference images stored in the <code>static</code> folder by using <a href="../en/cont/markdown.html#images">markdown syntax for images</a>.</p>
-<h2 id="front-matter-configuration">Front Matter configuration</h2>
-<p>Each Hugo page has to define a <a href="https://gohugo.io/content/front-matter/" target="_blank" rel="noopener noreferrer">Front Matter</a> in <em>yaml</em>, <em>toml</em> or <em>json</em>.</p>
-<p>This template uses the following parameters on top of Hugo ones :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+++</span>
-<span style="color:#75715e"># Table of content (toc) is enabled by default. Set this parameter to true to disable it.</span>
-<span style="color:#75715e"># Note: Toc is always disabled for chapter pages</span>
-<span style="color:#a6e22e">disableToc</span> = <span style="color:#e6db74">&#34;false&#34;</span>
-<span style="color:#75715e"># If set, this will be used for the page&#39;s menu entry (instead of the `title` attribute)</span>
-<span style="color:#a6e22e">menuTitle</span> = <span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#75715e"># The title of the page in menu will be prefixed by this HTML content</span>
-<span style="color:#a6e22e">pre</span> = <span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#75715e"># The title of the page in menu will be postfixed by this HTML content</span>
-<span style="color:#a6e22e">post</span> = <span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#75715e"># Set the page as a chapter, changing the way it&#39;s displayed</span>
-<span style="color:#a6e22e">chapter</span> = <span style="color:#66d9ef">false</span>
-<span style="color:#75715e"># Hide a menu entry by setting this to true</span>
-<span style="color:#a6e22e">hidden</span> = <span style="color:#66d9ef">false</span>
-<span style="color:#75715e"># Display name of this page modifier. If set, it will be displayed in the footer.</span>
-<span style="color:#a6e22e">LastModifierDisplayName</span> = <span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#75715e"># Email of this page modifier. If set with LastModifierDisplayName, it will be displayed in the footer</span>
-<span style="color:#a6e22e">LastModifierEmail</span> = <span style="color:#e6db74">&#34;&#34;</span>
-<span style="color:#960050;background-color:#1e0010">+++</span>
-</code></pre></div><h3 id="ordering-sibling-menupage-entries">Ordering sibling menu/page entries</h3>
-<p>This template provides a <a href="https://gohugo.io/content/ordering/" target="_blank" rel="noopener noreferrer">flexible way</a> to handle order for your pages.</p>
-<p>The simplest way is to set <code>weight</code> parameter to a number.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+++</span>
-<span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;My page&#34;</span>
-<span style="color:#a6e22e">weight</span> = <span style="color:#ae81ff">5</span>
-<span style="color:#960050;background-color:#1e0010">+++</span>
-</code></pre></div><p>We recommend that you set the weight for chapters as multiple of 10, with the pages inside each chapter counting down from there. For example:</p>
-<p>Chapter 1: <code>weight = 10</code><br>
-Page 1: <code>weight = 11</code><br>
-Page 2: <code>weight = 12</code></p>
-<p>Chapter 2: <code>weight = 20</code><br>
-Page 1: <code>weight = 21</code></p>
-<h3 id="using-a-custom-title-for-menu-entries">Using a custom title for menu entries</h3>
-<p>By default, the template will use a page&rsquo;s <code>title</code> attribute for the menu item (or <code>linkTitle</code> if defined).</p>
-<p>But a page&rsquo;s title has to be descriptive on its own while the menu is a hierarchy.
-We&rsquo;ve added the <code>menuTitle</code> parameter for that purpose:</p>
-<p>For example (for a page named <code>content/install/linux.md</code>):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml"><span style="color:#960050;background-color:#1e0010">+++</span>
-<span style="color:#a6e22e">title</span> = <span style="color:#e6db74">&#34;Install on Linux&#34;</span>
-<span style="color:#a6e22e">menuTitle</span> = <span style="color:#e6db74">&#34;Linux&#34;</span>
-<span style="color:#960050;background-color:#1e0010">+++</span>
-</code></pre></div>
+<p><strong>Note</strong>: When the components are created, a integrity checksum is created for the artifacts and added to the recipe (view the recipe on the console to see the digest). Due to this, if you change an artifact, you must update the version for the component or recreate it.</p>
+
 
 
 
@@ -1113,54 +1062,6 @@ We&rsquo;ve added the <code>menuTitle</code> parameter for that purpose:</p>
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1406,7 +1307,7 @@ We&rsquo;ve added the <code>menuTitle</code> parameter for that purpose:</p>
 			<a class="nav nav-prev" href="../inference.html" title="Add Inference"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../inference/archetypes.html" title="Archetypes" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../inference/deploy.html" title="Deploy and Monitor" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

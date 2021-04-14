@@ -1,153 +1,75 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>/</loc>
     <lastmod>2021-04-13T11:06:22-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/setup-nvidia-device.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/setup-nvidia-device/nano.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/setup-nvidia-device/install-tools.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/greengrass-v2.html</loc>
     <lastmod>2021-04-13T09:13:16-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/inference.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/greengrass-v2/install.html</loc>
     <lastmod>2021-04-13T11:06:06-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/inference/make-components.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/greengrass-v2/validate.html</loc>
     <lastmod>2021-04-13T11:06:22-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/inference/archetypes.html</loc>
-  </url>
-  
-  <url>
-    <loc>/inference/markdown.html</loc>
-  </url>
-  
-  <url>
-    <loc>/inference/icons.html</loc>
-  </url>
-  
-  <url>
-    <loc>/inference/i18n.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>/inference/deploy.html</loc>
+  </url><url>
     <loc>/shortcodes.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/attachments.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/button.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/expand.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/img.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/notice.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/siteparam.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/siteurl.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/youtube.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/launch.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/launch/metadata.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-1.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-1/children-1-1.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1/children-1-1-1-1-1.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-2.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-3.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/test.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/shortcodes/children/children-2/test3.html</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tags.html</loc>
   </url>
-  
 </urlset>

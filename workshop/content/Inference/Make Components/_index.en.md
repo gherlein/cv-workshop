@@ -37,22 +37,6 @@ git clone git@github.com:scottrfrancis/aws-iot-greengrass-v2-deploy-nvidia-deeps
 │   │   │   └── samples_images
 │   │   │       ├── dog.jpg
 │   │   │       └── dog.npy
-│   │   ├── inference.py
-│   │   ├── init.sh
-│   │   ├── IPCUtils.py
-│   │   ├── jetson_inference.py
-│   │   ├── labels.py
-│   │   ├── LICENSE
-│   │   ├── sample_images
-│   │   │   ├── cat2.npy
-│   │   │   ├── cat.jpeg
-│   │   │   ├── cat.npy
-│   │   │   ├── dog.jpg
-│   │   │   └── dog.npy
-│   │   └── samples_images
-│   │       ├── cat2.npy
-│   │       ├── dog.jpg
-│   │       └── dog.npy
 │   ├── variant.Jetson.DLR
 │   │   └── 1.0.0
 │   │       ├── installer.sh
@@ -100,16 +84,29 @@ git clone git@github.com:scottrfrancis/aws-iot-greengrass-v2-deploy-nvidia-deeps
 cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/artifacts
 
 cd variant.Jetson.DLR/1.0.0/
-zip -m installer.zip *
+zip -rm installer.zip *
 
 cd ../..
+cd variant.Jetson.ImageClassification.ModelStore/0.1.1/
+zip -rm resnet18_v1-jetson.zip *
 
-
+cd ../..
+cd aws.greengrass.JetsonDLRImageClassification/1.0.0/
+zip -rm image_classification.zip *
 ```
-
-
-
-
+You should now have a zip file for each component like this
+```
+.
+├── aws.greengrass.JetsonDLRImageClassification
+│   └── 1.0.0
+│       └── image_classification.zip
+├── variant.Jetson.DLR
+│   └── 1.0.0
+│       └── installer.zip
+└── variant.Jetson.ImageClassification.ModelStore
+    └── 0.1.1
+        └── resnet18_v1-jetson.zip
+```
 
 2. Set the `bucket_name` environment variable for where you will host the artifact files. On your development **host**, extract your account number to an environment variable
 
@@ -127,4 +124,40 @@ aws s3 mb s3://$bucket_name
 
 **NB-** Alternatively, you can use an existing bucket. Set the environment variable `$bucket_name` for the remainder of this lab.
 
-2. 
+3. Copy the artifacts to the bucket
+
+```bash
+cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/artifacts
+
+aws s3 sync ./ s3://$bucket_name/artifacts/
+```
+
+Verify the layout of the artifacts in S3
+
+{{< img "s3-artifacts.png" "Artifacts in S3" >}}
+
+### Step 3: Create the components
+
+1. Modify the recipe files to use the bucket and artifacts you just uploaded
+
+```bash
+cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/recipes
+
+sed -i "s/BUCKET_NAME/$bucket_name/g" *.json
+```
+
+2. Create the components from the modified recipe files
+
+```bash
+cd ~/aws-iot-greengrass-v2-deploy-nvidia-deepstream/jetson_inference/recipes
+
+aws greengrassv2 create-component-version --inline-recipe fileb://variant.Jetson.DLR-1.0.0.json
+aws greengrassv2 create-component-version --inline-recipe fileb://variant.Jetson.ImageClassification.ModelStore-1.0.0.json
+aws greengrassv2 create-component-version --inline-recipe fileb://aws.greengrass.JetsonDLRImageClassification-1.0.0.json
+```
+
+Verify the components are shown in the [AWS IoT Management Console](https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores) under **Greengrass** and **Components**.
+
+{{< img "components.png" "Components" >}}
+
+**Note**: When the components are created, a integrity checksum is created for the artifacts and added to the recipe (view the recipe on the console to see the digest). Due to this, if you change an artifact, you must update the version for the component or recreate it.
