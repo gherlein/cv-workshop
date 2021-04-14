@@ -1,5 +1,5 @@
 +++
-title = "Greengrass V2"
+title = "Install Greengrass V2"
 date = 2021-04-13T09:13:16-07:00
 weight = 20
 chapter = true

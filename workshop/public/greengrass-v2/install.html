@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="generator" content="Hugo 0.82.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
   <meta name="description" content="AWS Computer Vision at the Edge Workshop">
 <meta name="author" content="Amazon AWS">
 
@@ -198,13 +198,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
-        
-        
+    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
+        parent
+        active
         
         ">
-      <a href="../greengrass-v2/validate.html">
-          <b>X. </b>Validate
+      <a href="../greengrass-v2/install.html">
+          Install
           
       </a>
       
@@ -222,13 +222,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
-        parent
-        active
+    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
+        
+        
         
         ">
-      <a href="../greengrass-v2/install.html">
-          <b>X. </b>Install
+      <a href="../greengrass-v2/validate.html">
+          Validate
           
       </a>
       
@@ -253,13 +253,13 @@
  
   
     
-    <li data-nav-id="/cont.html" title="Content" class="dd-item 
+    <li data-nav-id="/inference.html" title="Add Inference" class="dd-item 
         
         
         
         ">
-      <a href="../cont.html">
-          Content
+      <a href="../inference.html">
+          Add Inference
           
       </a>
       
@@ -280,13 +280,13 @@
  
   
     
-    <li data-nav-id="/cont/pages.html" title="Pages Organization" class="dd-item 
+    <li data-nav-id="/inference/make-components.html" title="Create the Inference Components" class="dd-item 
         
         
         
         ">
-      <a href="../cont/pages.html">
-          Pages Organization
+      <a href="../inference/make-components.html">
+          Create the Inference Components
           
       </a>
       
@@ -304,12 +304,12 @@
  
   
     
-    <li data-nav-id="/cont/archetypes.html" title="Archetypes" class="dd-item 
+    <li data-nav-id="/inference/archetypes.html" title="Archetypes" class="dd-item 
         
         
         
         ">
-      <a href="../cont/archetypes.html">
+      <a href="../inference/archetypes.html">
           Archetypes
           
       </a>
@@ -328,12 +328,12 @@
  
   
     
-    <li data-nav-id="/cont/markdown.html" title="Markdown Syntax" class="dd-item 
+    <li data-nav-id="/inference/markdown.html" title="Markdown Syntax" class="dd-item 
         
         
         
         ">
-      <a href="../cont/markdown.html">
+      <a href="../inference/markdown.html">
           Markdown Syntax
           
       </a>
@@ -352,12 +352,12 @@
  
   
     
-    <li data-nav-id="/cont/icons.html" title="Icons and Logos" class="dd-item 
+    <li data-nav-id="/inference/icons.html" title="Icons and Logos" class="dd-item 
         
         
         
         ">
-      <a href="../cont/icons.html">
+      <a href="../inference/icons.html">
           Icons and Logos
           
       </a>
@@ -376,12 +376,12 @@
  
   
     
-    <li data-nav-id="/cont/i18n.html" title="Multilingual and i18n" class="dd-item 
+    <li data-nav-id="/inference/i18n.html" title="Multilingual and i18n" class="dd-item 
         
         
         
         ">
-      <a href="../cont/i18n.html">
+      <a href="../inference/i18n.html">
           Multilingual and i18n
           
       </a>
@@ -805,9 +805,101 @@
           
 
 
-	<h3 id="chapter-x">Chapter X</h3>
-<h1 id="some-chapter-title">Some Chapter title</h1>
-<p>Lorem Ipsum.</p>
+	<p>This lab will guide you to set up AWS IoT Greengrass v2 on the device you previously set up.</p>
+<h3 id="step-1-connect-to-the-target-device">Step 1: Connect to the target device</h3>
+<blockquote>
+<p><strong>Using SSH</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh &lt;user&gt;@&lt;device&gt;
+</code></pre></div><blockquote>
+<p><strong>With Keybord and Monitor</strong></p>
+</blockquote>
+<p>Open the terminal app.</p>
+<h3 id="step-2-install-corretto-java">Step 2: Install Corretto (Java)</h3>
+<p>Enter these commands into the device shell:</p>
+<p>(Copy and paste one line at a time and enter password for <code>sudo</code> when prompted.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - 
+
+sudo add-apt-repository <span style="color:#e6db74">&#39;deb https://apt.corretto.aws stable main&#39;</span>
+
+sudo apt-get update; sudo apt-get install -y java-1.8.0-amazon-corretto-jdk
+</code></pre></div><p>Validate the successful installation of Java with</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">java -version
+</code></pre></div><p>The output should look similar to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openjdk version <span style="color:#e6db74">&#34;1.8.0_282&#34;</span>
+OpenJDK Runtime Environment Corretto-8.282.08.1 <span style="color:#f92672">(</span>build 1.8.0_282-b08<span style="color:#f92672">)</span>
+OpenJDK 64-Bit Server VM Corretto-8.282.08.1 <span style="color:#f92672">(</span>build 25.282-b08, mixed mode<span style="color:#f92672">)</span>
+</code></pre></div><p><em>NB- This workshop was developed with Corretto v 1.8, but other JREs may work just as well</em></p>
+<h3 id="step-3-download-greengrass-v2">Step 3: Download Greengrass v2</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip &gt; greengrass-nucleus-latest.zip
+
+unzip greengrass-nucleus-latest.zip -d GreengrassCore <span style="color:#f92672">&amp;&amp;</span> rm greengrass-nucleus-latest.zip
+</code></pre></div><h3 id="step-4-set-environment-variables">Step 4: Set environment variables</h3>
+<p>Greengrass v2 has the ability to self-install and configure, but needs access credentials. Additionally, this installer will create an IoT thing, thing group, and IAM roles. Provide these values through shell variables. The AWS CLI credentials can be the same as you used in the host setup or can be newly created for just this role. The installer will not save these values. Using shell variables eliminates the need to install the CLI on the device.</p>
+<table>
+<thead>
+<tr>
+<th>shell var</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AWS_ACCESS_KEY_ID</td>
+<td>ID for account to create resources</td>
+</tr>
+<tr>
+<td>AWS_SECRET_ACCESS_KEY</td>
+<td>secret key</td>
+</tr>
+<tr>
+<td>AWS_DEFAULT_REGION</td>
+<td>region to use &ndash; <code>us-west-2</code> for this workshop</td>
+</tr>
+<tr>
+<td>THING_NAME</td>
+<td>device name for this Greengrass Core</td>
+</tr>
+<tr>
+<td>GROUP_NAME</td>
+<td>name for the Greengrass Group</td>
+</tr>
+<tr>
+<td>ROLE_NAME</td>
+<td>name of IAM role for the core</td>
+</tr>
+<tr>
+<td>ROLE_ALIAS</td>
+<td>alias used to refer to role to allow role to change</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># replace these with your credentials</span>
+export AWS_ACCESS_KEY_ID<span style="color:#f92672">=</span>&lt;paste_your_id_here&gt;
+export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>&lt;paste_your_key_here&gt;
+
+<span style="color:#75715e"># modify any of these as desired, or copy/paste as is</span>
+export AWS_DEFAULT_REGION<span style="color:#f92672">=</span>us-west-2
+
+export THING_NAME<span style="color:#f92672">=</span>jetson
+export GROUP_NAME<span style="color:#f92672">=</span>jetsonGroup
+export ROLE_NAME<span style="color:#f92672">=</span>MyGreengrassV2Role
+export ROLE_ALIAS<span style="color:#f92672">=</span>MyGreengrassCoreTokenExchangeRoleAlias
+</code></pre></div><h3 id="step-5-run-the-installer">Step 5: Run the installer</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo -E java -Dlog.store<span style="color:#f92672">=</span>FILE <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -jar ./GreengrassCore/lib/Greengrass.jar <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --aws-region $AWS_DEFAULT_REGION <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --root /greengrass/v2 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --thing-name $THING_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --thing-group-name $GROUP_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --tes-role-name $ROLE_NAME <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --tes-role-alias-name $ROLE_ALIAS <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --component-default-user ggc_user:ggc_group <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --provision true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --setup-system-service true
+
+sudo chmod <span style="color:#ae81ff">755</span> /greengrass/v2 <span style="color:#f92672">&amp;&amp;</span> sudo chmod <span style="color:#ae81ff">755</span> /greengrass
+</code></pre></div><p>Your Greengrass core is now set up and ready to go. Continue on to the next step to validate the installation.</p>
 
 
 
@@ -918,22 +1010,6 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -946,9 +1022,6 @@
             
         
                     
-            
-        
-                    
                         
             
             
@@ -956,6 +1029,25 @@
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1277,10 +1369,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../greengrass-v2/validate.html" title="Validate"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../greengrass-v2.html" title="Install Greengrass V2"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../cont.html" title="Content" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../greengrass-v2/validate.html" title="Validate" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

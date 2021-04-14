@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="generator" content="Hugo 0.82.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
   <meta name="description" content="AWS Computer Vision at the Edge Workshop">
 <meta name="author" content="Amazon AWS">
 
@@ -198,13 +198,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
-        parent
-        active
+    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
+        
+        
         
         ">
-      <a href="../greengrass-v2/validate.html">
-          <b>X. </b>Validate
+      <a href="../greengrass-v2/install.html">
+          Install
           
       </a>
       
@@ -222,13 +222,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
-        
-        
+    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
+        parent
+        active
         
         ">
-      <a href="../greengrass-v2/install.html">
-          <b>X. </b>Install
+      <a href="../greengrass-v2/validate.html">
+          Validate
           
       </a>
       
@@ -253,13 +253,13 @@
  
   
     
-    <li data-nav-id="/cont.html" title="Content" class="dd-item 
+    <li data-nav-id="/inference.html" title="Add Inference" class="dd-item 
         
         
         
         ">
-      <a href="../cont.html">
-          Content
+      <a href="../inference.html">
+          Add Inference
           
       </a>
       
@@ -280,13 +280,13 @@
  
   
     
-    <li data-nav-id="/cont/pages.html" title="Pages Organization" class="dd-item 
+    <li data-nav-id="/inference/make-components.html" title="Create the Inference Components" class="dd-item 
         
         
         
         ">
-      <a href="../cont/pages.html">
-          Pages Organization
+      <a href="../inference/make-components.html">
+          Create the Inference Components
           
       </a>
       
@@ -304,12 +304,12 @@
  
   
     
-    <li data-nav-id="/cont/archetypes.html" title="Archetypes" class="dd-item 
+    <li data-nav-id="/inference/archetypes.html" title="Archetypes" class="dd-item 
         
         
         
         ">
-      <a href="../cont/archetypes.html">
+      <a href="../inference/archetypes.html">
           Archetypes
           
       </a>
@@ -328,12 +328,12 @@
  
   
     
-    <li data-nav-id="/cont/markdown.html" title="Markdown Syntax" class="dd-item 
+    <li data-nav-id="/inference/markdown.html" title="Markdown Syntax" class="dd-item 
         
         
         
         ">
-      <a href="../cont/markdown.html">
+      <a href="../inference/markdown.html">
           Markdown Syntax
           
       </a>
@@ -352,12 +352,12 @@
  
   
     
-    <li data-nav-id="/cont/icons.html" title="Icons and Logos" class="dd-item 
+    <li data-nav-id="/inference/icons.html" title="Icons and Logos" class="dd-item 
         
         
         
         ">
-      <a href="../cont/icons.html">
+      <a href="../inference/icons.html">
           Icons and Logos
           
       </a>
@@ -376,12 +376,12 @@
  
   
     
-    <li data-nav-id="/cont/i18n.html" title="Multilingual and i18n" class="dd-item 
+    <li data-nav-id="/inference/i18n.html" title="Multilingual and i18n" class="dd-item 
         
         
         
         ">
-      <a href="../cont/i18n.html">
+      <a href="../inference/i18n.html">
           Multilingual and i18n
           
       </a>
@@ -805,9 +805,204 @@
           
 
 
-	<h3 id="chapter-x">Chapter X</h3>
-<h1 id="some-chapter-title">Some Chapter title</h1>
-<p>Lorem Ipsum.</p>
+	<p>Use this lab to validate an installed Greengrass core through inspection of the Management Console and deploying a simple Hello World component.</p>
+<p><em>(This guide adapted from the <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/getting-started.html#create-first-component" target="_blank" rel="noopener noreferrer">Greengrass Getting Started Guide</a>)</em></p>
+<h3 id="step-1-inspect-the-console">Step 1: Inspect the Console</h3>
+<p>Navigate to the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> and Click <strong>Greengrass</strong> and then <strong>Core devices</strong> from the left side panel.</p>
+
+<figure>
+	<img src="../greengrass-v2/validate/gg-console.png?classes=shadow&width=60pc" alt="Greengrass Console" />
+</figure>
+<p><strong>Verify the core you created in the previous lab is shown with a &lsquo;Healthy&rsquo; status before proceeding.</strong></p>
+<h3 id="step-2-create-an-s3-bucket-and-the-component-artifacts">Step 2: Create an S3 bucket and the component artifacts</h3>
+<ol>
+<li>On your development <strong>host</strong>, extract your account number to an environment variable</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export region<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;us-west-2&#39;</span>
+export acct_num<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>aws sts get-caller-identity --query <span style="color:#e6db74">&#34;Account&#34;</span> --output text<span style="color:#66d9ef">)</span>
+export bucket_name<span style="color:#f92672">=</span>greengrass-component-artifacts-$acct_num-$region
+</code></pre></div><ol start="2">
+<li>Create the S3 bucket</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 mb s3://$bucket_name
+</code></pre></div><p><strong>NB-</strong> Alternatively, you can use an existing bucket. Set the environment variable <code>$bucket_name</code> for the remainder of this lab.</p>
+<ol start="3">
+<li>Create the artifact for the component using <code>vim</code> or the text editor of your choice</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p ~/GreengrassCore/artifacts/com.example.HelloWorld/1.0.0
+
+vim ~/GreengrassCore/artifacts/com.example.HelloWorld/1.0.0/hello_world.py
+</code></pre></div><p>and enter this content</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> datetime
+
+message <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;Hello, </span><span style="color:#e6db74">{sys.argv[1]}</span><span style="color:#e6db74">! Current time: {str(datetime.datetime.now())}.&#34;</span>
+
+<span style="color:#75715e"># Print the message to stdout.</span>
+print(message)
+
+<span style="color:#75715e"># Append the message to the log file.</span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;/tmp/Greengrass_HelloWorld.log&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#66d9ef">as</span> f:
+    print(message, file<span style="color:#f92672">=</span>f)
+</code></pre></div><p>You should now have a file layout similar to this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/GreengrassCore/
+├── artifacts
+│   └── com.example.HelloWorld
+│       └── 1.0.0
+│           └── hello_world.py
+</code></pre></div><ol start="4">
+<li>Copy the artifact to the S3 bucket</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 sync ~/GreengrassCore/ s3://$bucket_name/
+</code></pre></div><p>and verify the object layout is correct with</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws s3 ls s3://$bucket_name/ --recursive
+</code></pre></div><p>You should have a result simliar to</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">2021-04-13 16:17:54        <span style="color:#ae81ff">278</span> artifacts/com.example.HelloWorld/1.0.0/hello_world.py
+</code></pre></div><h3 id="step-3-create-the-hello-world-component">Step 3: Create the Hello World Component</h3>
+<ol>
+<li>On your development <strong>host</strong>, create a directory for the component artifacts.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir -p ~/GreengrassCore/recipes
+</code></pre></div><ol start="2">
+<li>Create a recipe file for the &lsquo;HelloWorld&rsquo; component</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim ~/GreengrassCore/recipes/com.example.HelloWorld-1.0.0.json
+</code></pre></div><p>And enter the following content for the recipe, replacing <code>&lt;paste_bucket_name_here&gt;</code> with the name of the bucket you created earlier</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;RecipeFormatVersion&#34;</span>: <span style="color:#e6db74">&#34;2020-01-25&#34;</span>,
+  <span style="color:#f92672">&#34;ComponentName&#34;</span>: <span style="color:#e6db74">&#34;com.example.HelloWorld&#34;</span>,
+  <span style="color:#f92672">&#34;ComponentVersion&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+  <span style="color:#f92672">&#34;ComponentDescription&#34;</span>: <span style="color:#e6db74">&#34;My first AWS IoT Greengrass component.&#34;</span>,
+  <span style="color:#f92672">&#34;ComponentPublisher&#34;</span>: <span style="color:#e6db74">&#34;Amazon&#34;</span>,
+  <span style="color:#f92672">&#34;ComponentConfiguration&#34;</span>: {
+    <span style="color:#f92672">&#34;DefaultConfiguration&#34;</span>: {
+      <span style="color:#f92672">&#34;Message&#34;</span>: <span style="color:#e6db74">&#34;world&#34;</span>
+    }
+  },
+  <span style="color:#f92672">&#34;Manifests&#34;</span>: [
+    {
+      <span style="color:#f92672">&#34;Platform&#34;</span>: {
+        <span style="color:#f92672">&#34;os&#34;</span>: <span style="color:#e6db74">&#34;linux&#34;</span>
+      },
+      <span style="color:#f92672">&#34;Lifecycle&#34;</span>: {
+        <span style="color:#f92672">&#34;Run&#34;</span>: <span style="color:#e6db74">&#34;python3 -u {artifacts:path}/hello_world.py &#39;{configuration:/Message}&#39;&#34;</span>
+      },
+      <span style="color:#f92672">&#34;Artifacts&#34;</span>: [
+        {
+          <span style="color:#f92672">&#34;URI&#34;</span>: <span style="color:#e6db74">&#34;s3://&lt;paste_bucket_name_here&gt;/artifacts/com.example.HelloWorld/1.0.0/hello_world.py&#34;</span>
+        }
+      ]
+    }
+  ]
+}
+</code></pre></div><ol start="3">
+<li>Create the component with the command</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">aws greengrassv2 create-component-version <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --inline-recipe fileb://~/GreengrassCore/recipes/com.example.HelloWorld-1.0.0.json
+</code></pre></div><p>and verify the command returns without errors similar to</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;arn&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:greengrass:us-west-2:11-----16:components:com.example.HelloWorld:versions:1.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;componentName&#34;</span>: <span style="color:#e6db74">&#34;com.example.HelloWorld&#34;</span>,
+    <span style="color:#f92672">&#34;componentVersion&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;creationTimestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-04-13T16:32:48.936000-07:00&#34;</span>,
+    <span style="color:#f92672">&#34;status&#34;</span>: {
+        <span style="color:#f92672">&#34;componentState&#34;</span>: <span style="color:#e6db74">&#34;REQUESTED&#34;</span>,
+        <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;NONE&#34;</span>,
+        <span style="color:#f92672">&#34;errors&#34;</span>: {}
+    }
+}
+</code></pre></div><h3 id="step-4-deploy-the-helloworld-component">Step 4: Deploy the HelloWorld component</h3>
+<ol>
+<li>Navigate to the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> and Click <strong>Greengrass</strong> and then <strong>Components</strong> from the left side panel.</li>
+</ol>
+
+<figure>
+	<img src="../greengrass-v2/validate/gg-components.png?classes=shadow&width=60pc" alt="Greengrass Components" />
+</figure>
+<p><strong>Verify the presence of the component you just created</strong></p>
+<ol start="2">
+<li>
+<p>Click on the <strong>com.example.HelloWorld</strong> link from the My components list, then click, <strong>Deploy</strong></p>
+</li>
+<li>
+<p>Select <strong>Create new deployment</strong> then click, <strong>Next</strong></p>
+</li>
+<li>
+<p>Name this deployment, <code>cv-lab</code>, select <strong>Core device</strong> for the Target Type, and provide the name of your Greengrass Core for the Target name&ndash;e.g. <code>jetson</code>.
+Click, <strong>Next</strong></p>
+</li>
+</ol>
+<p><em>NB- if you see the error <strong>Target has a configuration</strong>, click the <strong>Revise deployment</strong>. There can be only ONE device-specific deployment, however Thing group deployments can be layered.</em></p>
+<ol start="5">
+<li>
+<p>Verify <strong>com.example.HelloWorld</strong> is checked and click, <strong>Next</strong> and then click, <strong>Next</strong> twice more to the Review screen</p>
+</li>
+<li>
+<p>On the Review screen, verify all looks correct, then click, <strong>Deploy</strong></p>
+</li>
+</ol>
+<h3 id="step-5-validate-the-deployment">Step 5: Validate the deployment</h3>
+<ol>
+<li>Navigate to the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> and Click <strong>Greengrass</strong> and then <strong>Deployments</strong> from the left side panel. Refresh the screen after a couple minutes.</li>
+</ol>
+
+<figure>
+	<img src="../greengrass-v2/validate/deployed.png?classes=shadow&width=60pc" alt="Greengrass Deployments" />
+</figure>
+<p><strong>Verify the &lsquo;cv-lab&rsquo; deployment has &lsquo;Completed&rsquo;</strong></p>
+<p><em>You can also verify the status of your core is &lsquo;Healthy&rsquo; on the &lsquo;Core devices&rsquo; screen</em></p>
+<ol start="2">
+<li>From the device shell, check the HelloWorld log</li>
+</ol>
+<blockquote>
+<p><strong>Using SSH</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh &lt;user&gt;@&lt;device&gt;
+</code></pre></div><blockquote>
+<p><strong>With Keybord and Monitor</strong></p>
+</blockquote>
+<p>Open the terminal app.</p>
+<p>Then</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat /tmp/Greengrass_HelloWorld.log
+</code></pre></div><p><strong>Verify the message and timestamp</strong></p>
+<h3 id="optional-step-6-clean-up">(Optional) Step 6: Clean up</h3>
+<p>It can be handy to leave the Hello World component in your account to verify basic Greengrass Core communications, but you may wish to remove it from the device.</p>
+<ul>
+<li>
+<p>To remove the Hello World component from the deployment:</p>
+<ul>
+<li>
+<p>From the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> and Click <strong>Greengrass</strong> and then <strong>Deployments</strong>. Check <strong>cv-lab</strong> (or whatever name you gave your deployment) and click <strong>Revise</strong>. Click, <strong>Next</strong> then un-check the <code>com.example.HelloWorld</code> component and click, <strong>Next</strong>.  Click, <strong>Next</strong> twice more, make sure everything is correct on the Review screen and click, <strong>Deploy</strong>.</p>
+</li>
+<li>
+<p>Verify the python script is removed from the <code>/greengrass/v2/packages/artifacts-unarchived/com.example.Helloworld</code> directory on the target device. <em>You may need to be root to access this directory</em>  It is normal for the directory structure to remain after components are removed.</p>
+</li>
+<li>
+<p>You can revise the deployment to add this component back at any time if desired or add this component to other deployments as a check of the deployment function.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To <strong>delete</strong> the component from your account
+<em>(This will remove the ability to re-deploy the component without re-creating it)</em>:</p>
+<ul>
+<li>
+<p>From the <a href="https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores" target="_blank" rel="noopener noreferrer">AWS IoT Management Console</a> and Click <strong>Greengrass</strong> and then <strong>Components</strong>. Click <code>com.example.HelloWorld</code> link, then <strong>Delete version</strong>.</p>
+</li>
+<li>
+<p><em>NB- multiple versions of the component can be created and deleted</em></p>
+</li>
+<li>
+<p>The artifact will remain present in your S3 bucket</p>
+</li>
+</ul>
+</li>
+<li>
+<p>You can use the S3 console or AWS CLI to delete the artifacts and the bucket if desired.</p>
+</li>
+</ul>
+<p><strong>Congratulations!! You now created functional Greengrass core and a test component</strong></p>
 
 
 
@@ -918,7 +1113,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -935,8 +1129,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -956,6 +1148,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1277,10 +1472,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../greengrass-v2.html" title="Install Greengrass V2"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../greengrass-v2/install.html" title="Install"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../greengrass-v2/install.html" title="Install" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../inference.html" title="Add Inference" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

@@ -7,7 +7,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="generator" content="Hugo 0.82.0" />
+  <meta name="generator" content="Hugo 0.79.0" />
   <meta name="description" content="AWS Computer Vision at the Edge Workshop">
 <meta name="author" content="Amazon AWS">
 
@@ -198,13 +198,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
+    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
         
         
         
         ">
-      <a href="../greengrass-v2/validate.html">
-          <b>X. </b>Validate
+      <a href="../greengrass-v2/install.html">
+          Install
           
       </a>
       
@@ -222,13 +222,13 @@
  
   
     
-    <li data-nav-id="/greengrass-v2/install.html" title="Install" class="dd-item 
+    <li data-nav-id="/greengrass-v2/validate.html" title="Validate" class="dd-item 
         
         
         
         ">
-      <a href="../greengrass-v2/install.html">
-          <b>X. </b>Install
+      <a href="../greengrass-v2/validate.html">
+          Validate
           
       </a>
       
@@ -253,13 +253,13 @@
  
   
     
-    <li data-nav-id="/cont.html" title="Content" class="dd-item 
+    <li data-nav-id="/inference.html" title="Add Inference" class="dd-item 
         
         
         
         ">
-      <a href="../cont.html">
-          Content
+      <a href="../inference.html">
+          Add Inference
           
       </a>
       
@@ -280,13 +280,13 @@
  
   
     
-    <li data-nav-id="/cont/pages.html" title="Pages Organization" class="dd-item 
+    <li data-nav-id="/inference/make-components.html" title="Create the Inference Components" class="dd-item 
         
         
         
         ">
-      <a href="../cont/pages.html">
-          Pages Organization
+      <a href="../inference/make-components.html">
+          Create the Inference Components
           
       </a>
       
@@ -304,12 +304,12 @@
  
   
     
-    <li data-nav-id="/cont/archetypes.html" title="Archetypes" class="dd-item 
+    <li data-nav-id="/inference/archetypes.html" title="Archetypes" class="dd-item 
         
         
         
         ">
-      <a href="../cont/archetypes.html">
+      <a href="../inference/archetypes.html">
           Archetypes
           
       </a>
@@ -328,12 +328,12 @@
  
   
     
-    <li data-nav-id="/cont/markdown.html" title="Markdown Syntax" class="dd-item 
+    <li data-nav-id="/inference/markdown.html" title="Markdown Syntax" class="dd-item 
         
         
         
         ">
-      <a href="../cont/markdown.html">
+      <a href="../inference/markdown.html">
           Markdown Syntax
           
       </a>
@@ -352,12 +352,12 @@
  
   
     
-    <li data-nav-id="/cont/icons.html" title="Icons and Logos" class="dd-item 
+    <li data-nav-id="/inference/icons.html" title="Icons and Logos" class="dd-item 
         
         
         
         ">
-      <a href="../cont/icons.html">
+      <a href="../inference/icons.html">
           Icons and Logos
           
       </a>
@@ -376,12 +376,12 @@
  
   
     
-    <li data-nav-id="/cont/i18n.html" title="Multilingual and i18n" class="dd-item 
+    <li data-nav-id="/inference/i18n.html" title="Multilingual and i18n" class="dd-item 
         
         
         
         ">
-      <a href="../cont/i18n.html">
+      <a href="../inference/i18n.html">
           Multilingual and i18n
           
       </a>
@@ -800,9 +800,10 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#step-1-install-aws-cli-on-developmet-host">Step 1: Install AWS CLI on developmet host</a></li>
+        <li><a href="#step-1-install-aws-cli-on-development-host">Step 1: Install AWS CLI on development host</a></li>
         <li><a href="#step-2-configure-the-aws-cli">Step 2: Configure the AWS CLI</a></li>
         <li><a href="#step-3-verify-configuration">Step 3: Verify configuration</a></li>
+        <li><a href="#step-4-install-other-linux-tools">Step 4: Install other Linux tools</a></li>
       </ul>
     </li>
   </ul>
@@ -826,7 +827,7 @@
 <ul>
 <li>AWS Command Line Interface (CLI)</li>
 </ul>
-<h3 id="step-1-install-aws-cli-on-developmet-host">Step 1: Install AWS CLI on developmet host</h3>
+<h3 id="step-1-install-aws-cli-on-development-host">Step 1: Install AWS CLI on development host</h3>
 <p>On your host, install the <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html" target="_blank" rel="noopener noreferrer">AWS CLI version 2</a></p>
 <blockquote>
 <p><strong>Linux (x86_64)</strong></p>
@@ -867,6 +868,15 @@ Default output format <span style="color:#f92672">[</span>json<span style="color
     <span style="color:#e6db74">&#34;Account&#34;</span>: <span style="color:#e6db74">&#34;11-----16&#34;</span>,
     <span style="color:#e6db74">&#34;Arn&#34;</span>: <span style="color:#e6db74">&#34;arn:aws:iam::11-----16:user/s---c&#34;</span>
 <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="step-4-install-other-linux-tools">Step 4: Install other Linux tools</h3>
+<blockquote>
+<p><strong>Required tools</strong>: These tools are required for later steps of the workshop.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install curl -y
+</code></pre></div><blockquote>
+<p><strong>Optional tools</strong>: These tools can make working with the device easier and are optional.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt install htop vim tree tmux -y
 </code></pre></div>
 
 
