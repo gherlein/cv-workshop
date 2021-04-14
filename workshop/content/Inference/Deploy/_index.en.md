@@ -62,3 +62,4 @@ deployments/
 
 Note that in this example, the deployment is version 26 and it was successfully deployed.
 
+5. Monitor MQTT topics on the [AWS IoT Console](https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/test) Test client by clicking, **Test** and subscribing to the topic `demo/topic`. The inference results are also logged in the file `/greengrass/v2/work/greengrass_ml/inference_log/resnet18_v1-jetson_nano.log`.
