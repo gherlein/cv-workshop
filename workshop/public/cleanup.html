@@ -14,7 +14,7 @@
   <link rel="shortcut icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 <link rel="icon" href="https://a0.awsstatic.com/libra-css/images/site/fav/favicon.ico" type="image/ico" />
 
-  <title>Add Inference :: AWS Computer Vision at the Edge Workshop</title>
+  <title>Cleanup :: AWS Computer Vision at the Edge Workshop</title>
 
   
   <link href="./css/nucleus.css" rel="stylesheet">
@@ -45,7 +45,7 @@
   
 </head>
 
-<body class="" data-url="./inference.html">
+<body class="" data-url="./cleanup.html">
   <nav id="sidebar" class="">
 
 
@@ -254,8 +254,8 @@
   
     
     <li data-nav-id="/inference.html" title="Add Inference" class="dd-item 
-        parent
-        active
+        
+        
         
         ">
       <a href="./inference.html">
@@ -336,8 +336,8 @@
   
     
     <li data-nav-id="/cleanup.html" title="Cleanup" class="dd-item 
-        
-        
+        parent
+        active
         
         ">
       <a href="./cleanup.html">
@@ -396,7 +396,7 @@
           
           
           
-          <a href='./'>AWS Computer Vision at the Edge Workshop</a> > Add Inference
+          <a href='./'>AWS Computer Vision at the Edge Workshop</a> > Cleanup
           
           
           
@@ -412,17 +412,35 @@
       <div id="chapter">
         
         <div id="body-inner">
-          <h1>Add Inference</h1>
+          <h1>Cleanup</h1>
           
           
 
 
-	<p>In this section, you will</p>
+	<p>In this workshop, you</p>
 <ul>
-<li>Create the inference components</li>
-<li>Deploy them with Greengrass v2</li>
-<li>Validate the results</li>
+<li>Configured an nVidia device</li>
+<li>Installed Greengrass v2</li>
+<li>Learned to create and validate components</li>
+<li>Created and Deployed Components to run Inference</li>
+<li>Validated and explored the various log files and monitoring for Greengrass</li>
 </ul>
+<p>If you wish to clean it up, you will need to delete some or all of these resources:</p>
+<ul>
+<li>Remove components from a deployment</li>
+<li>Cancel the deployment</li>
+<li>Delete components</li>
+<li>Remove objects from S3</li>
+<li>IoT Greengrass Groups, Things, and Thing Groups</li>
+<li>Certificates, Policies, and Roles</li>
+</ul>
+<h3 id="removing-components-from-a-deployment">Removing components from a deployment</h3>
+<p>From the <a href="https://us-west-2.console.aws.amazon.com/iot/home" target="_blank" rel="noopener noreferrer">AWS IoT Console</a> click, <strong>Greengrass</strong>, <strong>Deployments</strong>, and Check the desired deployment (e.g. <code>cv-lab</code>). Click, <strong>Revise</strong> and unselect the components you no longer wish to have as part of the deployment.  This will leave the deployment in tact, but will delete the package from the the targeted devices. You can also <strong>Cancel</strong> the deployment, which will stop any future processing. Deployments <strong>cannot</strong> be deleted.</p>
+<h3 id="deleting-components">Deleting Components</h3>
+<p>Components are independent of the Deployments. As such, they can be retained for future use or deleted. To delete the, click <strong>Greengrass</strong>, <strong>Components</strong>, then Click on the link for the un-desired component (e.g. <code>aws.greengrass.JetsonDLRImageClassification</code>). Click, <strong>Delete version</strong>.  Note that each Component version can be deleted separately.</p>
+<p>Deleting the component does NOT remove the artifacts from S3 storage.</p>
+<h3 id="remove-objects-from-s3">Remove objects from S3</h3>
+<p>Navigate to the S3 console and use the interface to delete objects, prefixes, or the entire bucket.</p>
 
 
 
@@ -568,7 +586,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -583,9 +600,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -621,6 +635,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -642,10 +657,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="./greengrass-v2/validate.html" title="Validate"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="./inference/deploy.html" title="Deploy and Monitor"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="./inference/make-components.html" title="Create the Inference Components" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="./setup-nvidia-device.html" title="Setup nVidia Device" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

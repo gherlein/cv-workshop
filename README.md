@@ -1,1 +1,1 @@
-# AQWS Computer Vision at the Edge Workshop
+# AWS Computer Vision at the Edge Workshop

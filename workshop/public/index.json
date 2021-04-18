@@ -67,91 +67,14 @@
 	"title": "Deploy and Monitor",
 	"tags": [],
 	"description": "",
-	"content": "In this section, you will deploy the components created in the previous section. As deployment can take some time (15 minutes is not unusual), this guide will also describe some basic monitoring of the Greengrass core and the deployment process.\nStep 1: Deploy the HelloWorld component   Navigate to the AWS IoT Management Console and Click Greengrass and then Deployments from the left side panel. Check the box next to cv-lab and click, Revise.\n  Click, Next and check the boxes for the components you just created.\n    Click, Next three times more to advance to the Review screen, verify the information is correct and click, Deploy.  "
+	"content": "In this section, you will deploy the components created in the previous section. As deployment can take some time (15 minutes is not unusual), this guide will also describe some basic monitoring of the Greengrass core and the deployment process.\nStep 1: Deploy the new components   Navigate to the AWS IoT Management Console and Click Greengrass and then Deployments from the left side panel. Check the box next to cv-lab and click, Revise.\n  Click, Next and check the boxes for the components you just created.\n    Click, Next two more times to advance to the Review screen, verify the information is correct and click, Deploy.  Deployment can take 15 minutes or more\nStep 2: Monitor the progress of the deployment  Connect to the target device  ssh \u0026lt;user\u0026gt;@\u0026lt;dev\u0026gt; You may find it helpful to open multiple shells and/or use tmux or other tool.\nBecome su  sudo su - Enter your password when prompted.\nNavigate to the Greengrass root  cd /greengrass/v2 The specific directory on your device may be different i]f you installed greengrass in some other location.\nObserve and tail some status directories and files  tail -f logs/greengrass.log Will show the status of the Greengrass core as it processes the deployment.\ntree deployments/ Shows the status of the most recent deployment and any on-going deployments\ndeployments/ ├── arn.aws.greengrass.us-west-2.119690479916.configuration.thing+jetson.26 │ ├── deployment_metadata.json │ └── rollback_snapshot.tlog └── previous-success -\u0026gt; /greengrass/v2/deployments/arn.aws.greengrass.us-west-2.11-----16.configuration.thing+jetson.26 Note that in this example, the deployment is version 26 and it was successfully deployed.\nMonitor MQTT topics on the AWS IoT Console Test client by clicking, Test and subscribing to the topic demo/topic. The inference results are also logged in the file /greengrass/v2/work/greengrass_ml/inference_log/resnet18_v1-jetson_nano.log.  "
 },
 {
-	"uri": "/shortcodes.html",
-	"title": "Shortcodes",
+	"uri": "/cleanup.html",
+	"title": "Cleanup",
 	"tags": [],
 	"description": "",
-	"content": "Hugo uses Markdown for its simple content format. However, there are a lot of things that Markdown doesn’t support well. You could use pure HTML to expand possibilities.\nBut this happens to be a bad idea. Everyone uses Markdown because it\u0026rsquo;s pure and simple to read even non-rendered. You should avoid HTML to keep it as simple as possible.\nTo avoid this limitations, Hugo created shortcodes. A shortcode is a simple snippet inside a page.\nHugo-theme-learn provides multiple shortcodes on top of existing ones.\n Attachments  The Attachments shortcode displays a list of files attached to a page.\n Button  Nice buttons on your page.\n Children  List the child pages of a page\n Expand  Displays an expandable/collapsible section of text on your page\n Image  Displays a preformatted image on your page\n Notice  Disclaimers to help you structure your page\n Site param  Get value of site params variables in your page.\n Site URL  Get the base site URL in your page.\n Youtube  Youtube links that respect privacy.\n "
-},
-{
-	"uri": "/shortcodes/attachments.html",
-	"title": "Attachments",
-	"tags": [],
-	"description": "The Attachments shortcode displays a list of files attached to a page.",
-	"content": "The Attachments shortcode displays a list of files attached to a page.\n  Attachments   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    Usage The shortcurt lists files found in a specific folder.\nAttachements must be place in a folder named like your page and ending with .files.\n  content  chapter  _index.en.md _index.en.files  attachment.pdf         Be aware that if you use a multilingual website, you will need to have as many folders as languages.\n Parameters    Parameter Default Description     title \u0026ldquo;Attachments\u0026rdquo; List\u0026rsquo;s title   style \u0026quot;\u0026quot; Choose between \u0026ldquo;orange\u0026rdquo;, \u0026ldquo;grey\u0026rdquo;, \u0026ldquo;blue\u0026rdquo; and \u0026ldquo;green\u0026rdquo; for nice style   pattern \u0026ldquo;.*\u0026rdquo; A regular expressions, used to filter the attachments by file name. The pattern parameter value must be regular expressions.    For example:\n To match a file suffix of \u0026lsquo;jpg\u0026rsquo;, use *.jpg (not *.jpg). To match file names ending in \u0026lsquo;jpg\u0026rsquo; or \u0026lsquo;png\u0026rsquo;, use .*(jpg|png)  Examples List of attachments ending in pdf or mp4 {{%attachments title=\u0026quot;Related files\u0026quot; pattern=\u0026quot;.*(png|mp4)\u0026quot;/%}}  renders as\n  Related files   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    Colored styled box {{%attachments style=\u0026quot;orange\u0026quot; /%}}  renders as\n  Attachments   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    {{%attachments style=\u0026quot;grey\u0026quot; /%}}  renders as\n  Attachments   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    {{%attachments style=\u0026quot;blue\u0026quot; /%}}  renders as\n  Attachments   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    {{%attachments style=\u0026quot;green\u0026quot; /%}}  renders as\n  Attachments   AWS_AWS_logo_RGB.png  (32 kb)   DeckAssets_allup_light_filter-documents@2x.png  (6 kb)    "
-},
-{
-	"uri": "/shortcodes/button.html",
-	"title": "Button",
-	"tags": [],
-	"description": "Nice buttons on your page.",
-	"content": "A button is a just a clickable button with optional icon.\n{{% button href=\u0026quot;https://en.wikipedia.org/wiki/Here_be_dragons\u0026quot; %}}Here be dragonss{{% /button %}} {{% button href=\u0026quot;https://en.wikipedia.org/wiki/Here_be_dragons\u0026quot; icon=\u0026quot;fas fa-download\u0026quot; %}}Here be dragons with icon{{% /button %}} {{% button href=\u0026quot;https://en.wikipedia.org/wiki/Here_be_dragons\u0026quot; icon=\u0026quot;fas fa-download\u0026quot; icon-position=\u0026quot;right\u0026quot; %}}Here be dragons with icon right{{% /button %}}  Here be dragons   Here be dragons with icon  Here by dragons with icon right   "
-},
-{
-	"uri": "/shortcodes/children.html",
-	"title": "Children",
-	"tags": [],
-	"description": "List the child pages of a page",
-	"content": "Use the children shortcode to list the child pages of a page and the further descendants (children\u0026rsquo;s children). By default, the shortcode displays links to the child pages.\nUsage    Parameter Default Description     page current Specify the page name (section name) to display children for   style \u0026ldquo;li\u0026rdquo; Choose the style used to display descendants. It could be any HTML tag name   showhidden \u0026ldquo;false\u0026rdquo; When true, child pages hidden from the menu will be displayed   description \u0026ldquo;false\u0026rdquo; Allows you to include a short text under each page in the list.when no description exists for the page, children shortcode takes the first 70 words of your content. read more info about summaries on gohugo.io   depth 1 Enter a number to specify the depth of descendants to display. For example, if the value is 2, the shortcode will display 2 levels of child pages.  Tips: set 999 to get all descendants   sort none Sort Children By\nWeight - to sort on menu orderName - to sort alphabetically on menu labelIdentifier - to sort alphabetically on identifier set in frontmatterURL - URL    Demo {{% children description=\u0026quot;true\u0026quot; depth=\u0026quot;3\u0026quot; showhidden=\u0026quot;true\u0026quot; %}}   page 1    page 1-1    page 1-1-1     page 2    page test 3      page 3     page test     {{% children style=\u0026quot;h2\u0026quot; depth=\u0026quot;3\u0026quot; description=\u0026quot;true\u0026quot; showhidden=\u0026quot;true\u0026quot; %}}   page 1  This is a demo child page\n page 1-1  This is a demo child page\n page 1-1-1  This is a demo child page\n page 2  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n page test 3  This is a page test\n page 3  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n page test  This is a page test\n {{% children style=\u0026quot;div\u0026quot; depth=\u0026quot;999\u0026quot; showhidden=\u0026quot;true\u0026quot; %}}   page 1   page 1-1   page 1-1-1   page 1-1-1-1   page 1-1-1-1-1   Attachments   Button   Children   page 1   page 1-1   page 1-1-1   page 1-1-1-1   page 1-1-1-1-1   page 2   page test 3   page 3   page test   Expand   Image   Notice   Site param   Site URL   Youtube   page 2   page test 3   page 3   page test   "
-},
-{
-	"uri": "/shortcodes/expand.html",
-	"title": "Expand",
-	"tags": [],
-	"description": "Displays an expandable/collapsible section of text on your page",
-	"content": "The Expand shortcode displays an expandable/collapsible section of text on your page. Here is an example\n  Expand me...   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n  Usage This shortcode takes exactly one optional parameter to define the text that appears next to the expand/collapse icon. (default is \u0026ldquo;Expand me\u0026hellip;\u0026quot;)\n{{%expand \u0026quot;Does this template rock?\u0026quot; %}}Yes !.{{% /expand%}}    Does this template rock?   Yes !   Demo {{%expand%}} Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. {{% /expand%}}    Expand me...   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n  "
-},
-{
-	"uri": "/shortcodes/img.html",
-	"title": "Image",
-	"tags": [],
-	"description": "Displays a preformatted image on your page",
-	"content": "The img shortcode displays a preformatted image that is stored in your Page Bundle on your page. This means you should store your images in the same directory as your page. In the example below, the page markdown and the \u0026ldquo;chapter.en.png\u0026rdquo; file are both stored in the same directory.\nUsage This shortcode takes two parameters:\n The relative path to the image (based on the location of the current page). The alternate text to be used with the image.  {{\u0026lt; img \u0026#34;chapter.en.png\u0026#34; \u0026#34;A Chapter\u0026#34; \u0026gt;}}    "
-},
-{
-	"uri": "/shortcodes/notice.html",
-	"title": "Notice",
-	"tags": [],
-	"description": "Disclaimers to help you structure your page",
-	"content": "The notice shortcode shows 4 types of disclaimers to help you structure your page.\nNote {{% notice note %}} A notice disclaimer {{% /notice %}} renders as\nA notice disclaimer\n Info {{% notice info %}} An information disclaimer {{% /notice %}} renders as\nAn information disclaimer\n Tip {{% notice tip %}} A tip disclaimer {{% /notice %}} renders as\nA tip disclaimer\n Warning {{% notice warning %}} An warning disclaimer {{% /notice %}} renders as\nA warning disclaimer\n "
-},
-{
-	"uri": "/shortcodes/siteparam.html",
-	"title": "Site param",
-	"tags": [],
-	"description": "Get value of site params variables in your page.",
-	"content": "siteparam shortcode is used to help you print values of site params.\nFor instance, in this current site, the editURL variable is used in config.toml\n[params] editURL = \u0026#34;https://code.amazon.com/packages/Aws-workshop-template/blobs/master/--/workshop/content/\u0026#34; Use the siteparam shortcode to display its value.\n`editURL` Value : {{% siteparam \u0026quot;editURL\u0026quot; %}} is displayed as\neditURL Value :\n"
-},
-{
-	"uri": "/shortcodes/siteurl.html",
-	"title": "Site URL",
-	"tags": [],
-	"description": "Get the base site URL in your page.",
-	"content": "The siteurl shortcode is used to help you print the current base URL for your hosted site.\nFor instance, in this current site, the baseURL is\nUse the siteurl shortcode to display its value.\n{{% siteurl %}} is displayed as\n"
-},
-{
-	"uri": "/shortcodes/youtube.html",
-	"title": "Youtube",
-	"tags": [],
-	"description": "Youtube links that respect privacy.",
-	"content": "Amazon is required to adhere to GDPR regulations, and controlling cookies is one part of that. Linking to Youtube can create cookies. Using the Youtube shortcode ensures privacy-enhanced links to youtube videos:\n{{% youtube dQw4w9WgXcQ %}}   "
-},
-{
-	"uri": "/launch.html",
-	"title": "Launch",
-	"tags": [],
-	"description": "",
-	"content": "Follow these steps to launch your workshop for others to use!\n"
-},
-{
-	"uri": "/launch/metadata.html",
-	"title": "Metadata",
-	"tags": [],
-	"description": "Use metadata to catalogue and describe your workshop",
-	"content": "There is a metadata.yml file found in the root of this repository that allows workshop creators to store descriptive information about their content for discovery \u0026amp; identification purposes.\nA metadata.yml file is required for all workshops that are intended to be reused and shared broadly.\n #name - DNS-friendly name for the workshop. This will be used when generating the hosting URL (ie. https://my-first-workshop.workshops.aws/) name: my-first-workshop #title - The title of your workshop title: My First Workshop  #description - A short description that will be displayed in search results description: Creating unicorns with serverless bitcoin magic!  #categories - Refer to official AWS categories covered by the workshop content here categories: - Networking - Compute #services - Refer to the official AWS service names covered by the workshop content here services: - Api Gateway - Lambda #level - Approximate skill level needed for this workshop level: 100 #duration - Estimated duration in minutes duration: 60 #cost - Cost in USD. If the content is offered without cost, enter 0 cost: 0 #author - Amazon alias of the primary author of the content author: mpgoetz  #audience - Names of the personas associated with this workshop audience: - IT Professional - Developer "
+	"content": "In this workshop, you\n Configured an nVidia device Installed Greengrass v2 Learned to create and validate components Created and Deployed Components to run Inference Validated and explored the various log files and monitoring for Greengrass  If you wish to clean it up, you will need to delete some or all of these resources:\n Remove components from a deployment Cancel the deployment Delete components Remove objects from S3 IoT Greengrass Groups, Things, and Thing Groups Certificates, Policies, and Roles  Removing components from a deployment From the AWS IoT Console click, Greengrass, Deployments, and Check the desired deployment (e.g. cv-lab). Click, Revise and unselect the components you no longer wish to have as part of the deployment. This will leave the deployment in tact, but will delete the package from the the targeted devices. You can also Cancel the deployment, which will stop any future processing. Deployments cannot be deleted.\nDeleting Components Components are independent of the Deployments. As such, they can be retained for future use or deleted. To delete the, click Greengrass, Components, then Click on the link for the un-desired component (e.g. aws.greengrass.JetsonDLRImageClassification). Click, Delete version. Note that each Component version can be deleted separately.\nDeleting the component does NOT remove the artifacts from S3 storage.\nRemove objects from S3 Navigate to the S3 console and use the interface to delete objects, prefixes, or the entire bucket.\n"
 },
 {
 	"uri": "/categories.html",
@@ -159,69 +82,6 @@
 	"tags": [],
 	"description": "",
 	"content": ""
-},
-{
-	"uri": "/shortcodes/children/children-1.html",
-	"title": "page 1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-1/children-1-1.html",
-	"title": "page 1-1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-1/children-1-1/children-1-1-1.html",
-	"title": "page 1-1-1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1.html",
-	"title": "page 1-1-1-1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-1/children-1-1/children-1-1-1/children-1-1-1-1/children-1-1-1-1-1.html",
-	"title": "page 1-1-1-1-1",
-	"tags": [],
-	"description": "This is a demo child page",
-	"content": "This is a demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-2.html",
-	"title": "page 2",
-	"tags": [],
-	"description": "",
-	"content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n"
-},
-{
-	"uri": "/shortcodes/children/children-3.html",
-	"title": "page 3",
-	"tags": [],
-	"description": "",
-	"content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n"
-},
-{
-	"uri": "/shortcodes/children/test.html",
-	"title": "page test",
-	"tags": [],
-	"description": "This is a page test",
-	"content": "This is a test demo child page\n"
-},
-{
-	"uri": "/shortcodes/children/children-2/test3.html",
-	"title": "page test 3",
-	"tags": [],
-	"description": "This is a page test",
-	"content": "This is a test 3 demo child page\n"
 },
 {
 	"uri": "/tags.html",
