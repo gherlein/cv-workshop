@@ -475,6 +475,10 @@ unzip greengrass-nucleus-latest.zip -d GreengrassCore <span style="color:#f92672
 <td>region to use &ndash; <code>us-west-2</code> for this workshop</td>
 </tr>
 <tr>
+<td><em>name for things created by the installer</em></td>
+<td></td>
+</tr>
+<tr>
 <td>THING_NAME</td>
 <td>device name for this Greengrass Core</td>
 </tr>
@@ -499,6 +503,7 @@ export AWS_SECRET_ACCESS_KEY<span style="color:#f92672">=</span>&lt;paste_your_k
 <span style="color:#75715e"># modify any of these as desired, or copy/paste as is</span>
 export AWS_DEFAULT_REGION<span style="color:#f92672">=</span>us-west-2
 
+<span style="color:#75715e"># the installer will create the resources with these names</span>
 export THING_NAME<span style="color:#f92672">=</span>jetson
 export GROUP_NAME<span style="color:#f92672">=</span>jetsonGroup
 export ROLE_NAME<span style="color:#f92672">=</span>MyGreengrassV2Role
