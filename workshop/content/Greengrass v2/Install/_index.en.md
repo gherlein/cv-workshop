@@ -67,6 +67,7 @@ Greengrass v2 has the ability to self-install and configure, but needs access cr
 | AWS_ACCESS_KEY_ID | ID for account to create resources |
 | AWS_SECRET_ACCESS_KEY | secret key |
 | AWS_DEFAULT_REGION | region to use -- `us-west-2` for this workshop |
+| _name for things created by the installer_ |
 | THING_NAME | device name for this Greengrass Core |
 | GROUP_NAME | name for the Greengrass Group |
 | ROLE_NAME | name of IAM role for the core |
@@ -81,6 +82,7 @@ export AWS_SECRET_ACCESS_KEY=<paste_your_key_here>
 # modify any of these as desired, or copy/paste as is
 export AWS_DEFAULT_REGION=us-west-2
 
+# the installer will create the resources with these names
 export THING_NAME=jetson
 export GROUP_NAME=jetsonGroup
 export ROLE_NAME=MyGreengrassV2Role
