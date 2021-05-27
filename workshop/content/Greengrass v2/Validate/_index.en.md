@@ -20,12 +20,25 @@ _(This guide adapted from the [Greengrass Getting Started Guide](https://docs.aw
 
 ### Step 2: Create an S3 bucket and the component artifacts
 
-1. On your development **host**, extract your account number to an environment variable
+1. On your development **host**, set the same environment variables as you did on the deployment target:
 
 ```bash
-export region='us-west-2'
+# replace these with your credentials
+export AWS_ACCESS_KEY_ID=<paste_your_id_here>
+export AWS_SECRET_ACCESS_KEY=<paste_your_key_here>
+
+# modify any of these as desired, or copy/paste as is
+export AWS_DEFAULT_REGION=us-west-2
+
+# the installer will create the resources with these names
+export THING_NAME=jetson
+export GROUP_NAME=jetsonGroup
+export ROLE_NAME=MyGreengrassV2Role
+export ROLE_ALIAS=MyGreengrassCoreTokenExchangeRoleAlias
+
+# useful variables here
 export acct_num=$(aws sts get-caller-identity --query "Account" --output text)
-export bucket_name=greengrass-component-artifacts-$acct_num-$region
+export bucket_name=greengrass-component-artifacts-$acct_num-$AWS_DEFAULT_REGION
 ```
 
 2. Create the S3 bucket
@@ -34,7 +47,7 @@ export bucket_name=greengrass-component-artifacts-$acct_num-$region
 aws s3 mb s3://$bucket_name
 ```
 
-**NB-** Alternatively, you can use an existing bucket. Set the environment variable `$bucket_name` for the remainder of this lab.
+**NB-** Alternatively, you can use an existing bucket. If so, ensure that you set the environment variable `$bucket_name` to your existing bucket for the remainder of this lab.
 
 3. Create the artifact for the component using `vim` or the text editor of your choice
 
@@ -82,21 +95,105 @@ You should have a result simliar to
 2021-04-13 16:17:54        278 artifacts/com.example.HelloWorld/1.0.0/hello_world.py
 ```
 
+5.  Set a policy on the bucket allowing Greengrass to read from it
+
+Run this bash script by pasting it directly into a terminal or saving it as a file and running it at the command line.
+
+```bash
+#!/bin/bash
+(
+cat <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "arn:aws:s3:::$bucket_name/*"
+    }
+  ]
+}
+POLICY
+) > policy.json
+aws iam create-policy --policy-name MyGreengrassV2ComponentArtifactPolicy --policy-document file://policy.json
+aws iam attach-role-policy --role-name $ROLE_NAME --policy-arn arn:aws:iam::$acct_num:policy/MyGreengrassV2ComponentArtifactPolicy
+aws iam list-attached-role-policies --role-name $ROLE_NAME
+```
+
+You should see something like this:
+
+```
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "MyGreengrassV2RoleAccess",
+            "PolicyArn": "arn:aws:iam::<accountnum>:policy/MyGreengrassV2RoleAccess"
+        },
+        {
+            "PolicyName": "MyGreengrassV2ComponentArtifactPolicy",
+            "PolicyArn": "arn:aws:iam::<accountnum>:policy/MyGreengrassV2ComponentArtifactPolicy"
+        }
+    ]
+}
+```
+
 ### Step 3: Create the Hello World Component
 
-1. On your development **host**, create a directory for the component artifacts.
+1. Create a directory for the component artifacts.
 
 ```bash
 mkdir -p ~/GreengrassCore/recipes
 ```
 
-2. Create a recipe file for the 'HelloWorld' component 
+2.  You can run one script to create the component at once, or do each step one at a time manually.  To run it automatically, paste the following
+into a terminal or save it to a file and exectute it:
+
+```bash
+#!/bin/bash
+json=com.example.HelloWorld-1.0.0.json
+(
+cat <<RECIPE
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "com.example.HelloWorld",
+  "ComponentVersion": "1.0.0",
+  "ComponentDescription": "My first AWS IoT Greengrass component.",
+  "ComponentPublisher": "Amazon",
+  "ComponentConfiguration": {
+    "DefaultConfiguration": {
+      "Message": "world"
+    }
+  },
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux"
+      },
+      "Lifecycle": {
+        "Run": "python3 -u {artifacts:path}/hello_world.py '{configuration:/Message}'"
+      },
+      "Artifacts": [
+        {
+          "URI": "s3://$bucket_name/artifacts/com.example.HelloWorld/1.0.0/hello_world.py"
+        }
+      ]
+    }
+  ]
+}
+RECIPE
+) > $json
+aws greengrassv2 create-component-version --inline-recipe fileb://$json
+```
+
+Or, to manually create a recipe file for the 'HelloWorld' component 
 
 ```bash
 vim ~/GreengrassCore/recipes/com.example.HelloWorld-1.0.0.json
 ```
 
-And enter the following content for the recipe, replacing `<paste_bucket_name_here>` with the name of the bucket you created earlier
+Enter the following content for the recipe, replacing `<paste_bucket_name_here>` with the name of the bucket you created earlier
 
 ```json
 {
@@ -128,14 +225,14 @@ And enter the following content for the recipe, replacing `<paste_bucket_name_he
 }
 ```
 
-3. Create the component with the command
+Then manually create the component:
 
 ```bash
 aws greengrassv2 create-component-version \
   --inline-recipe fileb://~/GreengrassCore/recipes/com.example.HelloWorld-1.0.0.json
 ```
 
-and verify the command returns without errors similar to
+3.  Regradless of which of the above you did, Verify the command returns without errors similar to
 
 ```json
 {
@@ -150,7 +247,9 @@ and verify the command returns without errors similar to
     }
 }
 ```
-### Step 4: Deploy the HelloWorld component
+
+
+### Step 4: Deploy the HelloWorld component using the AWS Console
 
 1.  Navigate to the [AWS IoT Management Console](https://us-west-2.console.aws.amazon.com/iot/home?region=us-west-2#/greengrass/v2/cores) and Click **Greengrass** and then **Components** from the left side panel.
 
